@@ -30,6 +30,7 @@ function renderBookList(list) {
 
   list.forEach((book) => {
     const { title, authors, publisher, publishedDate, imageLinks } = book.volumeInfo;
+    console.log(book.volumeInfo.infoLink);
 
     const cardHTML = `
       <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full flex flex-col sm:flex-row h-64">
@@ -44,6 +45,7 @@ function renderBookList(list) {
             <p class="text-sm text-gray-600 mb-1">Author: <span class="font-medium">${authors?.join(", ") || "Unknown"}</span></p>
             <p class="text-sm text-gray-600 mb-1">Publisher: ${publisher || "N/A"}</p>
             <p class="text-sm text-gray-600">Published: ${publishedDate || "Unknown"}</p>
+            <a href="${book?.volumeInfo?.infoLink}" target="_blank" class="text-sm text-[#B46A44]">More -></a>
           </div>
         </div>
       </div>
