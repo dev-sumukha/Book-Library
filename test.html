@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+
+  </div>
+</body>
+<script>
+  const container = document.querySelector(".container");
+  let bookList = [];
+
+  async function fetchData() {
+    const response = await fetch("https://api.freeapi.app/api/v1/public/books");
+    const jsonData = await response.json();
+
+    bookList = jsonData.data.data;
+  }
+
+  function createCards(list) {
+    list.forEach((book) => {
+      const p = `<li>${book.volumeInfo.title}</li>`
+      container.insertAdjacentHTML("af",p);
+    });
+  }
+
+  fetchData()
+  .then(() => {
+    // console.log(bookList);       // This will log the fetched books
+    createCards(bookList);       // Now you can safely use bookList
+  })
+  .catch(error => {
+    console.error("Error fetching books:", error);
+  });
+</script>
+
+</html>
